@@ -39,3 +39,4 @@ apt-get install libgmp10 wget libperl5.22 unzip pax sysstat sqlite3 libaio1 -y
 echo "Proses Installasi Selesai..."
 
 echo "Created BY : Muhammad Farras Rayhand"
+
