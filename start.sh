@@ -63,7 +63,31 @@ echo "Penambahan Repository Selesai..."
  esac
 
 ####################################################################################################################################
+ read -r -p "Apakah anda ingin Menginstall Packet SSH? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+apt-get install ssh
+ echo -n "Masukkan IP Address anda [contoh 192.168.1.1] : "
+read aipi
+ echo -n "Masukkan Port SSH [default = 22] : "
+read port
+sed -i "s/Port 22/$port/g" /etc/ssh/sshd_config
 
+echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port"
+ ;;
+ 
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+ 
+     *)
+ echo "Invalid input..."
+ ;;
+ esac
+ 
+ #####################################################################################################################################
 read -r -p "Apakah anda ingin menginstall packet untuk zimbra [Y/n] " input
  
  case $input in
