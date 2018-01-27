@@ -112,18 +112,19 @@ read forward
 echo -n "Masukkan nama db untuk ip [contoh = db.reverse] : "
 read reverse
 
-echo "zone ~$domain~ {" >> /etc/bind/named.conf.default-zones
-echo "	type master;" >> /etc/bind/named.conf.default-zones
-echo "	file ~/etc/bind/$forward~;" >> /etc/bind/named.conf.default-zones
-echo "};" >> /etc/bind/named.conf.default-zones
+ex -sc 'zone "$domain" {' -cx /etc/bind/named.conf.default-zones
+ex -sc ' type master;' -cx /etc/bind/named.conf.default-zones
+ex -sc ' file ~/etc/bind/$forward~;' -cx /etc/bind/named.conf.default-zones
+ex -sc '};' -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.local /etc/bind/$forward
+
 sed -i 's/127.0.0.1/$ipadd/g' /etc/bind/$forward
 sed -i 's/localhost/$domain/g' /etc/bind/$forward
 
-echo "zone ~$ip~ {" >> /etc/bind/named.conf.default-zones
-echo "	type master;" >> /etc/bind/named.conf.default-zones
-echo "	file ~/etc/bind/$reverse~;" >> /etc/bind/named.conf.default-zones
-echo "};" >> /etc/bind/named.conf.default-zones
+ex -sc 'zone "$ip" {' -cx /etc/bind/named.conf.default-zones
+ex -sc ' type master;' -cx /etc/bind/named.conf.default-zones
+ex -sc ' file ~/etc/bind/$reverse~;' -cx /etc/bind/named.conf.default-zones
+ex -sc '};' -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.127 /etc/bind/$reverse
 
 ex -sc '%s/~/"/g|x' /etc/bind/named.conf.default.zones
