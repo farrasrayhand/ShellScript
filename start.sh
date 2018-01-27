@@ -130,7 +130,7 @@ echo "max-lease-time 7200;" >> /etc/dhcp/dhcpd.conf
 echo "}" >> /etc/dhcp/dhcpd.conf
 
 sed -i 's/"/@/g' /etc/default/isc-dhcp-server
-sed -i "s/INTERFACES=@@/ INTERFACES=@@$int@@/g" /etc/default/isc-dhcp-server
+sed -i "s/INTERFACES=@@/ INTERFACES=@$int@/g" /etc/default/isc-dhcp-server
 sed -i 's/@/"/g' /etc/default/isc-dhcp-server
 sed -i 's/=/"/g' /etc/dhcp/dhcpd.conf
 
