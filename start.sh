@@ -133,7 +133,7 @@ sed -i 's/"/@/g' /etc/default/isc-dhcp-server
 sed -i "s/INTERFACES=@@/ INTERFACES=@$int@/g" /etc/default/isc-dhcp-server
 sed -i 's/@/"/g' /etc/default/isc-dhcp-server
 sed -i 's/=/"/g' /etc/dhcp/dhcpd.conf
-
+service isc-dhcp-server restart
 /etc/init.d/isc-dhcp-server status
 echo "Installasi Service DHCP Server Selesai..."
  ;;
