@@ -68,12 +68,12 @@ echo "Penambahan Repository Selesai..."
  case $input in
      [yY][eE][sS]|[yY])
  echo "Yes"
-apt-get install ssh
+apt-get install ssh -y
  echo -n "Masukkan IP Address anda [contoh 192.168.1.1] : "
 read aipi
  echo -n "Masukkan Port SSH [default = 22] : "
 read port
-sed -i "s/Port 22/$port/g" /etc/ssh/sshd_config
+sed -i "s/Port 22/Port $port/g" /etc/ssh/sshd_config
 
 echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port"
  ;;
