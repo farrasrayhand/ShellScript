@@ -132,6 +132,8 @@ sed -i "s/localhost/$domain/g" /etc/bind/$forward
 sed -i "s/1.0.0/$host/g" /etc/bind/$forward
 
 sed -i 's/=/"/g' /etc/bind/named.conf.default-zones
+
+service bind9 restart
  ;;
  
      [nN][oO]|[nN])
