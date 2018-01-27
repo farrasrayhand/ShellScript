@@ -128,8 +128,8 @@ ex -sc "i| type master;" -cx /etc/bind/named.conf.default-zones
 ex -sc "i| file =/etc/bind/$reverse=;" -cx /etc/bind/named.conf.default-zones
 ex -sc "i|};" -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.127 /etc/bind/$reverse
-sed -i "s/localhost/$domain/g" /etc/bind/$forward
-sed -i "s/1.0.0/$host/g" /etc/bind/$forward
+sed -i "s/localhost/$domain/g" /etc/bind/$reverse
+sed -i "s/1.0.0/$host/g" /etc/bind/$reverse
 
 sed -i 's/=/"/g' /etc/bind/named.conf.default-zones
 
