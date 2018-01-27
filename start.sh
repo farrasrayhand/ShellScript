@@ -22,6 +22,8 @@ ex -sc '1i|deb http://kambing.ui.ac.id/ubuntu xenial main restricted universe mu
 ex -sc '1i|#' -cx /etc/apt/sources.list
 ex -sc '1i|#REPO KAMBING' -cx /etc/apt/sources.list
 
+echo "Penambahan Repository Selesai..."
+
  ;;
  
      [nN][oO]|[nN])
@@ -51,6 +53,8 @@ ex -sc '1i|deb http://buaya.klas.or.id/ubuntu/ xenial main restricted universe m
 ex -sc '1i|#' -cx /etc/apt/sources.list
 ex -sc '1i|#REPO BUAYA' -cx /etc/apt/sources.list
 
+echo "Penambahan Repository Selesai..."
+
  ;;
  
      [nN][oO]|[nN])
@@ -63,7 +67,7 @@ ex -sc '1i|#REPO BUAYA' -cx /etc/apt/sources.list
  esac
 done
 
-echo "Penambahan Repository Selesai..."
+############################################################################################################################
 
 
 echo "Melakukan update repository"
