@@ -117,8 +117,8 @@ echo "	type master;" >> /etc/bind/named.conf.default-zones
 echo "	file ~/etc/bind/$forward~;" >> /etc/bind/named.conf.default-zones
 echo "};" >> /etc/bind/named.conf.default-zones
 cp /etc/bind/db.local /etc/bind/$forward
-ex -sc '%s/127.0.0.1/$ipadd/g|x' /etc/bind/$forward
-ex -sc '%s/localhost/$domain/g|x' /etc/bind/$forward
+sed -i 's/127.0.0.1/$ipadd/g' /etc/bind/$forward
+sed -i 's/localhost/$domain/g' /etc/bind/$forward
 
 echo "zone ~$ip~ {" >> /etc/bind/named.conf.default-zones
 echo "	type master;" >> /etc/bind/named.conf.default-zones
