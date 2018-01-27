@@ -118,8 +118,8 @@ read domain
 echo -n "Masukkan DNS Server untuk DHCP Server [contoh 192.168.1.1, 8.8.8.8] : "
 read dns
 
-echo "subnet $net netmask $mask { >> /etc/dhcp/dhcpd.conf
-echo "range $range;" /etc/dhcp/dhcpd.conf
+echo "subnet $net netmask $mask {" >> /etc/dhcp/dhcpd.conf
+echo "range $range;" >> /etc/dhcp/dhcpd.conf
 echo "option domain-name-servers $dns;" >> /etc/dhcp/dhcpd.conf
 echo "option domain-name =$domain=;" >> /etc/dhcp/dhcpd.conf
 echo "option subnet-mask $mask;" >> /etc/dhcp/dhcpd.conf
