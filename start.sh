@@ -118,13 +118,17 @@ read domain
 echo -n "Masukkan DNS Server untuk DHCP Server [contoh 192.168.1.1, 8.8.8.8] : "
 read dns
 
-sed -i "s/#subnet 10.5.5.0 netmask 255.255.255.224 {/subnet $net netmask $mask {/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# range 10.5.5.26 10.5.5.30/ range $range/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# option domain-name-servers ns1.internal.example.org/ option domain-name-servers $dns/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# option domain-name =internal.example.org=/ option domain-name =$domain=/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# option subnet-mask 255.255.255.224/ option subnet-mask $mask/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# option routers 10.5.5.1/ option routers $ip/g" /etc/dhcp/dhcpd.conf
-sed -i "s/# option broadcast-address 10.5.5.31/ option broadcast-address $broad/g" /etc/dhcp/dhcpd.conf
+echo "subnet $net netmask $mask { >> /etc/dhcp/dhcpd.conf
+echo "range $range;" /etc/dhcp/dhcpd.conf
+echo "option domain-name-servers $dns;" >> /etc/dhcp/dhcpd.conf
+echo "option domain-name =$domain=;" >> /etc/dhcp/dhcpd.conf
+echo "option subnet-mask $mask;" >> /etc/dhcp/dhcpd.conf
+echo "option routers $ip;" >> /etc/dhcp/dhcpd.conf
+echo "option broadcast-address $broad;" >> /etc/dhcp/dhcpd.conf
+echo "default-lease-time 600;" >> /etc/dhcp/dhcpd.conf
+echo "max-lease-time 7200;" >> /etc/dhcp/dhcpd.conf
+echo "}" >> /etc/dhcp/dhcpd.conf
+
 sed -i 's/"/@/g' /etc/default/isc-dhcp-server
 sed -i "s/INTERFACES=@@/ INTERFACES=@@$int@@/g" /etc/default/isc-dhcp-server
 sed -i 's/@/"/g' /etc/default/isc-dhcp-server
