@@ -73,8 +73,9 @@ apt-get install ssh -y
 read aipi
  echo -n "Masukkan Port SSH [default = 22] : "
 read port
-sed -i "s/Port 22/Port $port/g" /etc/ssh/sshd_config
-
+sed -i "s/22/$port/g" /etc/ssh/sshd_config
+service ssh restart
+/etc/init.d/ssh status
 echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port"
  ;;
  
