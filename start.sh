@@ -62,8 +62,8 @@ echo "Penambahan Repository Selesai..."
  ;;
  esac
 
+####################################################################################################################################
 
-############################################################################################################################
 read -r -p "Apakah anda ingin menginstall packet untuk zimbra [Y/n] " input
  
  case $input in
@@ -82,5 +82,59 @@ echo "Proses Installasi Selesai..."
  echo "Invalid input..."
  ;;
  esac
-########################################################################
+####################################################################################################################################
+read -r -p "Apakah anda ingin menginstall packet bind9 [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+ echo "Installasi Packet bind9"
+apt-get install bind9 -y
+echo "Proses Installasi Selesai..."
+______________________________________________________________________________
+read -r -p "Apakah anda ingin membuat domain? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+echo -n "Masukkan domain yang akan dibuat [contoh = domain.net] : "
+read domain
+echo "zone ~$domain~ {" >> /etc/bind/named.conf.default-zones
+echo "	type master;" >> /etc/bind/named.conf.default-zones
+echo -n "Masukkan nama db untuk domain yang akan dibuat [contoh = db.forward] : "
+read forward
+echo "	file ~/etc/bind/$forward~;" >> /etc/bind/named.conf.default-zones
+echo "};" >> /etc/bind/named.conf.default-zones
+
+echo -n "Masukkan ip address untuk domain yang dibuat [contoh 192.168.1.1 = 1.168.192] : "
+read ip
+echo "zone ~$ip~ {" >> /etc/bind/named.conf.default-zones
+echo "	type master;" >> /etc/bind/named.conf.default-zones
+echo -n "Masukkan nama db untuk ip [contoh = db.reverse] : "
+read reverse
+echo "	file ~/etc/bind/$reverse~;" >> /etc/bind/named.conf.default-zones
+echo "};" >> /etc/bind/named.conf.default-zones
+
+ex -sc '%s/~/"/g|x' file
+ ;;
+ 
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+ 
+     *)
+ echo "Invalid input..."
+ ;;
+ esac
+ ;;
+ ________________________________________________________________________
+ 
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+ 
+     *)
+ echo "Invalid input..."
+ ;;
+ esac
 echo "Created BY : Muhammad Farras Rayhand"
