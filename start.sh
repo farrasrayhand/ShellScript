@@ -125,8 +125,13 @@ sed -i "s/# option domain-name =internal.example.org=/ option domain-name =$doma
 sed -i "s/# option subnet-mask 255.255.255.224/ option subnet-mask $mask/g" /etc/dhcp/dhcpd.conf
 sed -i "s/# option routers 10.5.5.1/ option routers $ip/g" /etc/dhcp/dhcpd.conf
 sed -i "s/# option broadcast-address 10.5.5.31/ option broadcast-address $broad/g" /etc/dhcp/dhcpd.conf
-sed -i "s/INTERFACES=""/ INTERFACES="$int"/g" /etc/default/isc-dhcp-server
+sed -i 's/"/@/g' /etc/default/isc-dhcp-server
+sed -i "s/INTERFACES=@@/ INTERFACES=@@$int@@/g" /etc/default/isc-dhcp-server
+sed -i 's/@/"/g' /etc/default/isc-dhcp-server
 sed -i 's/=/"/g' /etc/dhcp/dhcpd.conf
+
+/etc/init.d/isc-dhcp-server status
+echo "Installasi Service DHCP Server Selesai..."
  ;;
  
      [nN][oO]|[nN])
