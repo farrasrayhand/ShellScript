@@ -114,16 +114,16 @@ read reverse
 
 ex -sc 'zone "$domain" {' -cx /etc/bind/named.conf.default-zones
 ex -sc ' type master;' -cx /etc/bind/named.conf.default-zones
-ex -sc ' file ~/etc/bind/$forward~;' -cx /etc/bind/named.conf.default-zones
+ex -sc ' file "/etc/bind/$forward";' -cx /etc/bind/named.conf.default-zones
 ex -sc '};' -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.local /etc/bind/$forward
 
-sed -i 's/127.0.0.1/$ipadd/g' /etc/bind/$forward
-sed -i 's/localhost/$domain/g' /etc/bind/$forward
+sed -i "s/127.0.0.1/$ipadd/g" /etc/bind/$forward
+sed -i "s/localhost/$domain/g" /etc/bind/$forward
 
 ex -sc 'zone "$ip" {' -cx /etc/bind/named.conf.default-zones
 ex -sc ' type master;' -cx /etc/bind/named.conf.default-zones
-ex -sc ' file ~/etc/bind/$reverse~;' -cx /etc/bind/named.conf.default-zones
+ex -sc ' file "/etc/bind/$reverse";' -cx /etc/bind/named.conf.default-zones
 ex -sc '};' -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.127 /etc/bind/$reverse
 
