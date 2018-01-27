@@ -97,25 +97,36 @@ read -r -p "Apakah anda ingin membuat domain? [Y/n] " input
  case $input in
      [yY][eE][sS]|[yY])
  echo "Yes"
+ echo -n "Masukkan ip address anda [contoh 192.168.1.1] : "
+read ipadd
+
 echo -n "Masukkan domain yang akan dibuat [contoh = domain.net] : "
 read domain
-echo "zone ~$domain~ {" >> /etc/bind/named.conf.default-zones
-echo "	type master;" >> /etc/bind/named.conf.default-zones
-echo -n "Masukkan nama db untuk domain yang akan dibuat [contoh = db.forward] : "
-read forward
-echo "	file ~/etc/bind/$forward~;" >> /etc/bind/named.conf.default-zones
-echo "};" >> /etc/bind/named.conf.default-zones
 
 echo -n "Masukkan ip address untuk domain yang dibuat [contoh 192.168.1.1 = 1.168.192] : "
 read ip
-echo "zone ~$ip~ {" >> /etc/bind/named.conf.default-zones
-echo "	type master;" >> /etc/bind/named.conf.default-zones
+
+echo -n "Masukkan nama db untuk domain yang akan dibuat [contoh = db.forward] : "
+read forward
+
 echo -n "Masukkan nama db untuk ip [contoh = db.reverse] : "
 read reverse
+
+echo "zone ~$domain~ {" >> /etc/bind/named.conf.default-zones
+echo "	type master;" >> /etc/bind/named.conf.default-zones
+echo "	file ~/etc/bind/$forward~;" >> /etc/bind/named.conf.default-zones
+echo "};" >> /etc/bind/named.conf.default-zones
+cp /etc/bind/db.local /etc/bind/$forward
+ex -sc '%s/127.0.0.1/$ipadd/g|x' /etc/bind/$forward
+ex -sc '%s/localhost/$domain/g|x' /etc/bind/$forward
+
+echo "zone ~$ip~ {" >> /etc/bind/named.conf.default-zones
+echo "	type master;" >> /etc/bind/named.conf.default-zones
 echo "	file ~/etc/bind/$reverse~;" >> /etc/bind/named.conf.default-zones
 echo "};" >> /etc/bind/named.conf.default-zones
+cp /etc/bind/db.127 /etc/bind/$reverse
 
-ex -sc '%s/~/"/g|x' file
+ex -sc '%s/~/"/g|x' /etc/bind/named.conf.default.zones
  ;;
  
      [nN][oO]|[nN])
