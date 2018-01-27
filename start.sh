@@ -103,8 +103,11 @@ read ipadd
 echo -n "Masukkan domain yang akan dibuat [contoh = domain.net] : "
 read domain
 
-echo -n "Masukkan ip address untuk domain yang dibuat [contoh 192.168.1.1 = 1.168.192] : "
+echo -n "Masukkan network id untuk domain yang dibuat [contoh 192.168.1.1 = 1.168.192] : "
 read ip
+
+echo -n "Masukkan host id untuk domain yang dibuat [contoh 192.168.1.1/24 = 1] : "
+read host
 
 echo -n "Masukkan nama db untuk domain yang akan dibuat [contoh = db.forward] : "
 read forward
@@ -125,6 +128,8 @@ ex -sc "i| type master;" -cx /etc/bind/named.conf.default-zones
 ex -sc "i| file =/etc/bind/$reverse=;" -cx /etc/bind/named.conf.default-zones
 ex -sc "i|};" -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.127 /etc/bind/$reverse
+sed -i "s/localhost/$domain/g" /etc/bind/$forward
+sed -i "s/1.0.0/$host/g" /etc/bind/$forward
 
 sed -i 's/=/"/g' /etc/bind/named.conf.default-zones
  ;;
