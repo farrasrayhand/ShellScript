@@ -88,6 +88,56 @@ echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainny
  esac
  
  #####################################################################################################################################
+ read -r -p "Apakah anda ingin Menginstall Service DHCP Server? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+apt-get install isc-dhcp-server -y
+ echo -n "Masukkan Interface untuk DHCP Server [contoh ens33] : "
+read int
+ 
+ echo -n "Masukkan IP Address untuk DHCP Server [contoh 192.168.1.1] : "
+read ip
+
+echo -n "Masukkan IP Network untuk DHCP Server [contoh 192.168.1.0] : "
+read net
+
+echo -n "Masukkan IP Broadcast untuk DHCP Server [contoh 192.168.1.255] : "
+read broad
+
+echo -n "Masukkan NetMask untuk DHCP Server [contoh 255.255.255.0] : "
+read mask
+
+echo -n "Masukkan IP Range untuk DHCP Server [contoh 192.168.1.2 192.168.1.254] : "
+read range
+
+echo -n "Masukkan Domain untuk DHCP Server [contoh domain.net] : "
+read domain
+
+echo -n "Masukkan DNS Server untuk DHCP Server [contoh 192.168.1.1, 8.8.8.8] : "
+read dns
+
+sed -i "s/#subnet 10.5.5.0 netmask 255.255.255.224 {/subnet $net netmask $mask {/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# range 10.5.5.26 10.5.5.30/ range $range/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# option domain-name-servers ns1.internal.example.org/ option domain-name-servers $dns/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# option domain-name =internal.example.org=/ option domain-name =$domain=/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# option subnet-mask 255.255.255.224/ option subnet-mask $mask/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# option routers 10.5.5.1/ option routers $ip/g" /etc/dhcp/dhcpd.conf
+sed -i "s/# option broadcast-address 10.5.5.31/ option broadcast-address $broad/g" /etc/dhcp/dhcpd.conf
+sed -i "s/INTERFACES=""/ INTERFACES="$int"/g" /etc/default/isc-dhcp-server
+sed -i 's/=/"/g' /etc/dhcp/dhcpd.conf
+ ;;
+ 
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+ 
+     *)
+ echo "Invalid input..."
+ ;;
+ esac
+ #####################################################################################################################################
 read -r -p "Apakah anda ingin menginstall packet untuk zimbra [Y/n] " input
  
  case $input in
