@@ -126,6 +126,7 @@ ex -sc "i| file =/etc/bind/$reverse=;" -cx /etc/bind/named.conf.default-zones
 ex -sc "i|};" -cx /etc/bind/named.conf.default-zones
 cp /etc/bind/db.127 /etc/bind/$reverse
 
+sed -i 's/=/"/g' /etc/bind/named.conf.default-zones
  ;;
  
      [nN][oO]|[nN])
