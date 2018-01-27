@@ -91,7 +91,7 @@ read -r -p "Apakah anda ingin menginstall packet bind9 [Y/n] " input
  echo "Installasi Packet bind9"
 apt-get install bind9 -y
 echo "Proses Installasi Selesai..."
-______________________________________________________________________________
+
 read -r -p "Apakah anda ingin membuat domain? [Y/n] " input
  
  case $input in
@@ -138,8 +138,8 @@ ex -sc '%s/~/"/g|x' /etc/bind/named.conf.default.zones
  ;;
  esac
  ;;
- ________________________________________________________________________
- 
+
+
      [nN][oO]|[nN])
  echo "No"
         ;;
