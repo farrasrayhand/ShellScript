@@ -239,4 +239,6 @@ service bind9 restart
  echo "Invalid input..."
  ;;
  esac
+ 
+clear
 echo "Created BY : Muhammad Farras Rayhand"
