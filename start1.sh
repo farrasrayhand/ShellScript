@@ -73,3 +73,4 @@ echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SS
 echo
 echo
  echo -e "$IJO Created BY FarrasRayhand $RESET"
+
