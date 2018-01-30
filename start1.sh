@@ -3,10 +3,6 @@
 #Copyright (C) 2018 Muhammad Farras Rayhand
 #
 
-IJO='\e[38;5;82m'
-MAG='\e[35m'
-RESET='\e[0m'
-
 echo "Script ini dibuat untuk debian 8 (Jessie)"
 
 
@@ -15,26 +11,26 @@ read -r -p "Apakah anda ingin menambah Repo Kambing? [Y/n] " input
  case $input in
      [yY][eE][sS]|[yY])
  echo "Yes"
-echo -e "$IJO Menambah Repository Kambing $RESET"
+echo "Menambah Repository Kambing"
 ex -sc '1i|#' -cx /etc/apt/sources.list
 ex -sc '1i|deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free' -cx /etc/apt/sources.list
 ex -sc '1i|deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free' -cx /etc/apt/sources.list
 ex -sc '1i|deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free' -cx /etc/apt/sources.list
 ex -sc '1i|#REPO KAMBING' -cx /etc/apt/sources.list
 
-echo -e "$IJO Melakukan update repository $RESET"
+echo "Melakukan update repository"
 apt-get update
-echo -e "$IJO Penambahan Repository Selesai... $RESET"
+echo "Penambahan Repository Selesai..."
  ;;
  
      [nN][oO]|[nN])
- echo -e "$IJO No $RESET"
+ echo "No"
         ;;
  
      *)
- echo -e "$IJO "Invalid input... $RESET"
+ echo "Invalid input..."
  ;;
- esac
+esac
  ##############################################################################################################
   read -r -p "Apakah anda ingin Menginstall Packet SSH? [Y/n] " input
  
@@ -49,7 +45,7 @@ read port
 sed -i "s/22/$port/g" /etc/ssh/sshd_config
 service ssh restart
 /etc/init.d/ssh status
-echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port $RESET"
+echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port"
  ;;
  
      [nN][oO]|[nN])
@@ -62,15 +58,15 @@ echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SS
  esac
  
  clear
- echo -e "$IJO Melakukan update repository $RESET"
+ echo "Melakukan update repository"
  echo
  echo
 apt-get update
-echo -e "$IJO Penambahan Repository Selesai... $RESET"
+echo "Penambahan Repository Selesai..."
 echo
 echo
-echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port $RESET"
+echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port"
 echo
 echo
- echo -e "$IJO Created BY FarrasRayhand $RESET"
+ echo "Created BY FarrasRayhand"
 
