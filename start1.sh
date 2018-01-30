@@ -4,20 +4,6 @@
 #
 echo "Script ini dibuat untuk debian 8 (Jessie)"
 
-IJO='\e[38;5;82m'
-MAG='\e[35m'
-RESET='\e[0m'
-
-
-echo -e "$IJO                                                                                                              $RESET"
-echo -e "$IJO  _____                                       $MAG  ____                    _                           _     $RESET"
-echo -e "$IJO |  ___|   __ _   _ __   _ __    __ _   ___   $MAG |  _ \    __ _   _   _  | |__     __ _   _ __     __| |$RESET"
-echo -e "$IJO | |_     / _` | | '__| | '__|  / _` | / __|  $MAG | |_) |  / _` | | | | | | '_ \   / _` | | '_ \   / _` |$RESET"
-echo -e "$IJO |  _|   | (_| | | |    | |    | (_| | \__ \  $MAG |  _ <  | (_| | | |_| | | | | | | (_| | | | | | | (_| |$RESET"
-echo -e "$IJO |_|      \__,_| |_|    |_|     \__,_| |___/  $MAG |_| \_\  \__,_|  \__, | |_| |_|  \__,_| |_| |_|  \__,_|$RESET"
-echo -e "$IJO                                              $MAG                  |___/                                 $RESET"
-echo -e "$IJO                                              $MAG                                                        $RESET"
-
 
 read -r -p "Apakah anda ingin menambah Repo Kambing? [Y/n] " input
  
