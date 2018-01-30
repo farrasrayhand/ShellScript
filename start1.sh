@@ -61,7 +61,6 @@ echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainny
  echo "Melakukan update repository"
  echo
  echo
-apt-get update
 echo "Penambahan Repository Selesai..."
 echo
 echo
