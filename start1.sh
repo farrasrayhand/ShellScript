@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+#Copyright (C) 2018 Muhammad Farras Rayhand
+#
+echo "Script ini dibuat untuk debian 8 (Jessie)"
+
+IJO='\e[38;5;82m'
+MAG='\e[35m'
+RESET='\e[0m'
+
+
+echo -e "$IJO                                                                                                              $RESET"
+echo -e "$IJO  _____                                       $MAG  ____                    _                           _     $RESET"
+echo -e "$IJO |  ___|   __ _   _ __   _ __    __ _   ___   $MAG |  _ \    __ _   _   _  | |__     __ _   _ __     __| |$RESET"
+echo -e "$IJO | |_     / _` | | '__| | '__|  / _` | / __|  $MAG | |_) |  / _` | | | | | | '_ \   / _` | | '_ \   / _` |$RESET"
+echo -e "$IJO |  _|   | (_| | | |    | |    | (_| | \__ \  $MAG |  _ <  | (_| | | |_| | | | | | | (_| | | | | | | (_| |$RESET"
+echo -e "$IJO |_|      \__,_| |_|    |_|     \__,_| |___/  $MAG |_| \_\  \__,_|  \__, | |_| |_|  \__,_| |_| |_|  \__,_|$RESET"
+echo -e "$IJO                                              $MAG                  |___/                                 $RESET"
+echo -e "$IJO                                              $MAG                                                        $RESET"
+
+
+read -r -p "Apakah anda ingin menambah Repo Kambing? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+echo -e "$IJO Menambah Repository Kambing $RESET"
+ex -sc '1i|#' -cx /etc/apt/sources.list
+ex -sc '1i|deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free' -cx /etc/apt/sources.list
+ex -sc '1i|deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free' -cx /etc/apt/sources.list
+ex -sc '1i|deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free' -cx /etc/apt/sources.list
+ex -sc '1i|#REPO KAMBING' -cx /etc/apt/sources.list
+
+echo -e "$IJO Melakukan update repository $RESET"
+apt-get update
+echo -e "$IJO Penambahan Repository Selesai... $RESET"
+ ;;
+ 
+     [nN][oO]|[nN])
+ echo -e "$IJO No $RESET"
+        ;;
+ 
+     *)
+ echo -e "$IJO "Invalid input... $RESET"
+ ;;
+ esac
+ ##############################################################################################################
+  read -r -p "Apakah anda ingin Menginstall Packet SSH? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+apt-get install ssh -y
+ echo -n "Masukkan IP Address anda [contoh 192.168.1.1] : "
+read aipi
+ echo -n "Masukkan Port SSH [default = 22] : "
+read port
+sed -i "s/22/$port/g" /etc/ssh/sshd_config
+service ssh restart
+/etc/init.d/ssh status
+echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port $RESET"
+ ;;
+ 
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+ 
+     *)
+ echo "Invalid input..."
+ ;;
+ esac
+ 
+ clear
+ echo -e "$IJO Melakukan update repository $RESET"
+ echo
+ echo
+apt-get update
+echo -e "$IJO Penambahan Repository Selesai... $RESET"
+echo
+echo
+echo -e "$MAG Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainnya dengan format $aipi:$port $RESET"
+echo
+echo
+ echo -e "$IJO Created BY FarrasRayhand $RESET"
