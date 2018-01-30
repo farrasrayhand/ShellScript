@@ -2,6 +2,11 @@
 #
 #Copyright (C) 2018 Muhammad Farras Rayhand
 #
+
+IJO='\e[38;5;82m'
+MAG='\e[35m'
+RESET='\e[0m'
+
 echo "Script ini dibuat untuk debian 8 (Jessie)"
 
 
