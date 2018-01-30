@@ -58,9 +58,6 @@ echo "Installasi SSH Selesai, Connect menggunakan PUTTY atau aplikasi SSH lainny
  esac
  
  clear
- echo "Melakukan update repository"
- echo
- echo
 echo "Penambahan Repository Selesai..."
 echo
 echo
